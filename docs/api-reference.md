@@ -26,6 +26,7 @@ Immutable Algerian Dinar amount, stored as integer centimes (1 DA = 100 centimes
 | `Dinar.fromDinars(dinars: number)` | From a dinar amount (`5000`, `806.5`). Float-safe (parsed via string). |
 | `Dinar.fromString(value: string)` | From human/CSV text. See [`parseDinar`](#parsedinar) for the accepted grammar. |
 | `Dinar.zero()` | A zero amount. |
+| `Dinar.sum(amounts: Dinar[])` | Sum a list of amounts (empty list → zero). |
 
 ### Accessors
 
@@ -44,6 +45,7 @@ Immutable Algerian Dinar amount, stored as integer centimes (1 DA = 100 centimes
 | `.multiply(factor, rounding?)` | Multiply by a scalar; rounds a fractional centime (default `half-up`). |
 | `.percentage(percent, rounding?)` | `percent`% of the amount, e.g. `.percentage(19)` for 19% VAT. |
 | `.allocate(weights)` | Split into parts proportional to `weights`, distributing the remainder so the parts sum back exactly. Returns `Dinar[]`. |
+| `.split(parts)` | Split into `parts` equal shares (remainder-free). Returns `Dinar[]`. |
 | `.negate()` | Sign-flipped amount. |
 | `.abs()` | Absolute value. |
 
