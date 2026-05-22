@@ -4,7 +4,7 @@ A **type-safe Algerian Dinar (DZD) money type** for TypeScript. Amounts are stor
 
 [![npm](https://img.shields.io/npm/v/@bakissation/dinar?label=npm&color=cb3837)](https://www.npmjs.com/package/@bakissation/dinar)
 [![CI](https://github.com/bakissation/dinar/actions/workflows/ci.yml/badge.svg)](https://github.com/bakissation/dinar/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/@bakissation/dinar?color=blue)](./LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 
 - 🪙 **Integer-precise** — every amount is an integer number of centimes; no `0.1 + 0.2` surprises.
 - ➗ **Remainder-free allocation** — split a total across shares without creating or losing a centime.
