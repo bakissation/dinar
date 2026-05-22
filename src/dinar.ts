@@ -71,6 +71,11 @@ export class Dinar {
     return new Dinar(0);
   }
 
+  /** Sum a list of amounts; an empty list yields zero. */
+  static sum(amounts: Dinar[]): Dinar {
+    return amounts.reduce((total, amount) => total.add(amount), Dinar.zero());
+  }
+
   /** Integer centimes — also exactly the minor-units value SATIM expects. */
   get centimes(): number {
     return this.#centimes;
@@ -137,6 +142,14 @@ export class Dinar {
       remainder -= step;
     }
     return shares.map((c) => Dinar.fromCentimes(c));
+  }
+
+  /** Split into `parts` equal shares, distributing any remainder so they sum back exactly. */
+  split(parts: number): Dinar[] {
+    if (!Number.isInteger(parts) || parts < 1) {
+      throw new MoneyError('split requires a positive integer number of parts', 'INVALID_INPUT');
+    }
+    return this.allocate(new Array(parts).fill(1));
   }
 
   negate(): Dinar {
