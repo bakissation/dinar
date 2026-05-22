@@ -107,6 +107,35 @@ describe('Dinar.allocate', () => {
   });
 });
 
+describe('Dinar.sum', () => {
+  it('sums a list of amounts', () => {
+    const total = Dinar.sum([Dinar.fromCentimes(100), Dinar.fromCentimes(200), Dinar.fromCentimes(300)]);
+    expect(total.centimes).toBe(600);
+  });
+
+  it('returns zero for an empty list', () => {
+    expect(Dinar.sum([]).isZero()).toBe(true);
+  });
+});
+
+describe('Dinar.split', () => {
+  it('splits into equal parts with no lost centime', () => {
+    const parts = Dinar.fromCentimes(100).split(3);
+    expect(parts.map((p) => p.centimes)).toEqual([34, 33, 33]);
+    expect(Dinar.sum(parts).centimes).toBe(100);
+  });
+
+  it('split(1) returns the whole amount', () => {
+    expect(Dinar.fromCentimes(100).split(1).map((p) => p.centimes)).toEqual([100]);
+  });
+
+  it('rejects non-positive or non-integer parts', () => {
+    expect(() => Dinar.fromCentimes(100).split(0)).toThrow(MoneyError);
+    expect(() => Dinar.fromCentimes(100).split(-2)).toThrow(MoneyError);
+    expect(() => Dinar.fromCentimes(100).split(1.5)).toThrow(MoneyError);
+  });
+});
+
 describe('Dinar comparisons', () => {
   const a = Dinar.fromCentimes(100);
   const b = Dinar.fromCentimes(200);
